@@ -46,9 +46,9 @@ services:
     env_file:
       - ./envs/common-blockscout.env
     environment:
-      ETHEREUM_JSONRPC_HTTP_URL: https://nova-0.gemini-3h.subspace.network/ws
-      ETHEREUM_JSONRPC_TRACE_URL: https://nova-0.gemini-3h.subspace.network/ws
-      ETHEREUM_JSONRPC_WS_URL: wss://nova-0.gemini-3h.subspace.network/ws
+      ETHEREUM_JSONRPC_HTTP_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_TRACE_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_WS_URL: wss://auto-evm-1.taurus.autonomys.xyz/ws
       CHAIN_ID: "49000"
     volumes:
       - ./logs/:/app/logs/
@@ -113,5 +113,5 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     environment:
       NRIA_LICENSE_KEY: "${NR_API_KEY}"
-      NRIA_DISPLAY_NAME: "blockscout-gemini-3h"
+      NRIA_DISPLAY_NAME: "blockscout-taurus"
     restart: unless-stopped

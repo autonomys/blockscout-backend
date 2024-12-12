@@ -2,7 +2,7 @@ version: '3.9'
 
 services:
   backend:
-    image: ghcr.io/subspace/blockscout-backend:subspace
+    image: ghcr.io/autonomys/blockscout-backend:subspace
     pull_policy: always
     restart: always
     stop_grace_period: 5m

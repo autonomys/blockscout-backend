@@ -37,7 +37,7 @@ services:
       ETHEREUM_JSONRPC_HTTP_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
       ETHEREUM_JSONRPC_TRACE_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
       ETHEREUM_JSONRPC_WS_URL: wss://auto-evm-1.taurus.autonomys.xyz/ws
-      CHAIN_ID: "49000"
+      CHAIN_ID: "490000"
 
   nft_media_handler:
       depends_on:

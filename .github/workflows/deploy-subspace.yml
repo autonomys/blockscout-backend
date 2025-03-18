@@ -4,15 +4,17 @@ on:
   push:
     branches:
       - "!main"
+      - "!master"
   pull_request:
     branches:
       - subspace-backend
 
 env:
   TAG_NAME: subspace
-  OTP_VERSION: "25.2.1"
-  ELIXIR_VERSION: "1.14.5"
-  RELEASE_VERSION: "6.2.0"
+  OTP_VERSION: ${{ github.ref_name == '10284/merge' && '27.1' || vars.OTP_VERSION }}
+  ELIXIR_VERSION: ${{ github.ref_name == '10284/merge' && '1.17.3' || vars.ELIXIR_VERSION }}
+  RELEASE_VERSION: 7.0.2
+  DOCKER_CHAIN_NAME: autonomys
 
 # concurrency:
 #   group: ${{ github.workflow }}-${{ github.ref }}
@@ -53,7 +55,7 @@ jobs:
         run: echo "SHORT_SHA=`echo ${GITHUB_SHA} | cut -c1-8`" >> $GITHUB_ENV
 
       - name: Build and push Docker image for backend
-        uses: docker/build-push-action@v5
+        uses: docker/build-push-action@v6
         with:
           context: .
           file: ./docker/Dockerfile

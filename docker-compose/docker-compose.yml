@@ -34,22 +34,22 @@ services:
     links:
       - db:database
     environment:
-        ETHEREUM_JSONRPC_HTTP_URL: http://host.docker.internal:8545/
-        ETHEREUM_JSONRPC_TRACE_URL: http://host.docker.internal:8545/
-        ETHEREUM_JSONRPC_WS_URL: ws://host.docker.internal:8545/
-        CHAIN_ID: '1337'
+      ETHEREUM_JSONRPC_HTTP_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_TRACE_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_WS_URL: wss://auto-evm-1.taurus.autonomys.xyz/ws
+      CHAIN_ID: "490000"
 
   nft_media_handler:
-    depends_on:
-      - backend
-    extends:
-      file: ./services/nft_media_handler.yml
-      service: nft_media_handler
-    build:
-      context: ..
-      dockerfile: ./docker/Dockerfile
-      args:
-        RELEASE_VERSION: 7.0.2
+      depends_on:
+        - backend
+      extends:
+        file: ./services/nft_media_handler.yml
+        service: nft_media_handler
+      build:
+        context: ..
+        dockerfile: ./docker/Dockerfile
+        args:
+          RELEASE_VERSION: 7.0.2
 
   visualizer:
     extends:
@@ -105,3 +105,19 @@ services:
     extends:
       file: ./services/nginx.yml
       service: proxy
+
+  agent:
+    container_name: newrelic-infra
+    image: newrelic/infrastructure:latest
+    cap_add:
+      - SYS_PTRACE
+    network_mode: bridge
+    pid: host
+    privileged: true
+    volumes:
+      - "/:/host:ro"
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    environment:
+      NRIA_LICENSE_KEY: "${NR_API_KEY}"
+      NRIA_DISPLAY_NAME: "blockscout-taurus"
+    restart: unless-stopped

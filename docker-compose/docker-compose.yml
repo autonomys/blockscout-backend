@@ -5,6 +5,10 @@ services:
     extends:
       file: ./services/redis.yml
       service: redis-db
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   db-init:
     extends:
@@ -18,6 +22,10 @@ services:
     extends:
       file: ./services/db.yml
       service: db
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   backend:
     depends_on:
@@ -38,6 +46,10 @@ services:
       ETHEREUM_JSONRPC_TRACE_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
       ETHEREUM_JSONRPC_WS_URL: wss://auto-evm-1.taurus.autonomys.xyz/ws
       CHAIN_ID: "490000"
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   nft_media_handler:
       depends_on:
@@ -50,16 +62,28 @@ services:
         dockerfile: ./docker/Dockerfile
         args:
           RELEASE_VERSION: 7.0.2
+      logging:
+        driver: loki
+        options:
+          loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   visualizer:
     extends:
       file: ./services/visualizer.yml
       service: visualizer
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   sig-provider:
     extends:
       file: ./services/sig-provider.yml
       service: sig-provider
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   frontend:
     depends_on:
@@ -67,11 +91,19 @@ services:
     extends:
       file: ./services/frontend.yml
       service: frontend
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   stats-db-init:
     extends:
       file: ./services/stats.yml
       service: stats-db-init
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   stats-db:
     depends_on:
@@ -88,6 +120,10 @@ services:
     extends:
       file: ./services/stats.yml
       service: stats
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   user-ops-indexer:
     depends_on:
@@ -96,6 +132,10 @@ services:
     extends:
       file: ./services/user-ops-indexer.yml
       service: user-ops-indexer
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   proxy:
     depends_on:
@@ -105,6 +145,10 @@ services:
     extends:
       file: ./services/nginx.yml
       service: proxy
+    logging:
+      driver: loki
+      options:
+        loki-url: "https://logging.subspace.network/loki/api/v1/push"
 
   agent:
     container_name: newrelic-infra

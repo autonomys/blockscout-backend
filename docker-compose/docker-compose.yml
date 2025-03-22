@@ -42,9 +42,9 @@ services:
     links:
       - db:database
     environment:
-      ETHEREUM_JSONRPC_HTTP_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
-      ETHEREUM_JSONRPC_TRACE_URL: https://auto-evm-1.taurus.autonomys.xyz/ws
-      ETHEREUM_JSONRPC_WS_URL: wss://auto-evm-1.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_HTTP_URL: https://blockscout-rpc.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_TRACE_URL: https://blockscout-rpc.taurus.autonomys.xyz/ws
+      ETHEREUM_JSONRPC_WS_URL: wss://blockscout-rpc.taurus.autonomys.xyz/ws
       CHAIN_ID: "490000"
     logging:
       driver: loki
